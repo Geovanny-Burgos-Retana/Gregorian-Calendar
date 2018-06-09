@@ -70,3 +70,24 @@ def dias_desde_primero_enero(date: tuple) -> int:
             days += date[2] # (*)
             return days
 
+# Retorna el día de la semana del primero de enero del año ingresado
+def dia_primero_enero(year):
+    return dia_semana((year, 1, 1))
+
+# Ref: https://es.wikipedia.org/wiki/Congruencia_de_Zeller
+# Retorna un entero que significa el día de la semana de la
+# fecha ingresada (0 = Domingo, 1 = Lunes, así sucesivamente)
+def dia_semana(date: tuple) -> int:
+    if(fecha_es_valida(date)):
+        raise Exception("Fecha invalida")
+    q = date[2]
+    m = date[1]
+    annio = date[0]
+    if(m == 1 or m == 2):
+        m += 12
+        annio -= 1
+    k = annio%100
+    j = annio//100
+    h = (q+(((m+1)*26)//10)+k+(k//4)+(j//4)-2*j)
+    return (h-1)%7
+
