@@ -31,7 +31,7 @@ def bisiesto(year: int) -> bool:
 # Retorna True cuando cumpla con todas las
 # validaciones detallas en el algoritmo.
 def fecha_es_valida(date: tuple) -> bool:
-    if fecha_es_tupla(date):
+    if !(fecha_es_tupla(date)):
         raise Exception("Tupla de fecha con formato incorrecto")
     return (anno_permitido(date[0]) #Año dentro del rando permitido
        and 1 < date[1] < 12 #Mes dentro del rando permitido
@@ -40,7 +40,7 @@ def fecha_es_valida(date: tuple) -> bool:
 
 # Retorna una fecha con el día siguiente a la ingresada
 def dia_siguiente(date: tuple) -> tuple:
-    if fecha_es_valida(date):
+    if !(fecha_es_valida(date)):
         raise Exception("Fecha invalida")
     if date[2] < days_of_month[date[1]] or (date[1] == 2 and bisiesto(date[0] and date[2] == 28)):
         date[2] += 1 #Todo caso de no cambia de mes solo se aumenta en uno los días de la fecha
@@ -56,7 +56,7 @@ def dia_siguiente(date: tuple) -> tuple:
 # Retorna la cantidad de días pasados desde el primero
 # de enero del año ingresado en la tupla
 def dias_desde_primero_enero(date: tuple) -> int:
-    if fecha_es_valida(date):
+    if !(fecha_es_valida(date)):
         raise Exception("Fecha invalida")
     days = -1 #Porque (año, 1, 1) -> 0, es decir que -1 + 1 = 0 según el algoritmo (*)
     # Se suma directamente los días de cada mes anterior al mes ingresado
@@ -78,7 +78,7 @@ def dia_primero_enero(year):
 # Retorna un entero que significa el día de la semana de la
 # fecha ingresada (0 = Domingo, 1 = Lunes, así sucesivamente)
 def dia_semana(date: tuple) -> int:
-    if(fecha_es_valida(date)):
+    if !(fecha_es_valida(date)):
         raise Exception("Fecha invalida")
     q = date[2]
     m = date[1]
@@ -91,3 +91,7 @@ def dia_semana(date: tuple) -> int:
     h = (q+(((m+1)*26)//10)+k+(k//4)+(j//4)-2*j)
     return (h-1)%7
 
+def fecha_futura(date: tuple, days: int) -> tuple:
+    if !(fecha_es_valida(date)):
+        raise Exception("Fecha invalida")
+    
