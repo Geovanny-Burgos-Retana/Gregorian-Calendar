@@ -78,7 +78,7 @@ def dias_desde_primero_enero(date: tuple) -> int:
             days += days_month
         else:
             if bisiesto(date[0]) and date[1] > 2:
-                days = 0
+                days += 1
             days += date[2] # (*)
             return days
 
@@ -103,7 +103,6 @@ def dia_semana(date: tuple) -> int:
     k = annio%100
     j = annio//100
     h = (q+(((m+1)*26)//10)+k+(k//4)+(j//4)-2*j)
-    print(h)
     return (h-1)%7
 
 # ---------------------- R7 ----------------------
